@@ -62,6 +62,11 @@ class Formatter
         return $this;
     }
 
+    /**
+     * Formats the message.
+     * @param string $message
+     * @return string
+     */
     public function format($message)
     {
         // reset the stack
@@ -134,7 +139,13 @@ class Formatter
             } elseif ('bg' == $match[0]) {
                 $style->setBackground($match[1]);
             } elseif ('options' === $match[0]) {
-
+                preg_match_all('([^,;]+)', $match[1], $options);
+                $options = array_shift($options);
+                foreach ($options as $option) {
+                    $style->setOption($option);
+                }
+            } else {
+                return false;
             }
         }
 

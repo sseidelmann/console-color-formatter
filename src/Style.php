@@ -129,10 +129,16 @@ class Style
      * Sets a options.
      * @param string $option
      * @return Style
+     * @throws \Exception
      */
     public function setOption($option)
     {
-        $this->options[] = $option;
+
+        if (isset(self::$availableOptions[$option])) {
+            $this->options[] = self::$availableOptions[$option];
+        } else {
+            throw new \Exception(sprintf('option "%s" not found', $option));
+        }
 
         return $this;
     }
@@ -173,6 +179,11 @@ class Style
             $codes['unset'][] = $this->background['unset'];
         }
 
+        foreach ($this->options as $option) {
+            $codes['set'][]   = $option['set'];
+            $codes['unset'][] = $option['unset'];
+        }
+
         if (0 === count($codes['set'])) {
             return $message;
         }
@@ -197,6 +208,17 @@ class Style
     {
         return array_keys(self::$availableBackgroundColors);
     }
+
+    /**
+     * Returns the available options.
+     * @return array
+     */
+    public static function getAvailableOptions()
+    {
+        return array_keys(self::$availableOptions);
+    }
+
+
 
 
 
