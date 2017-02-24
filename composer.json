@@ -1,0 +1,17 @@
+{
+  "name": "sseidelmann/console-color-formatter",
+  "description": "Console color formatter",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Sebastian Seidelmann",
+      "email": "sebastian.seidelmann@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ConsoleColorFormatter\\": "src/"
+    }
+  }
+}
